@@ -1,0 +1,186 @@
+:root {
+  --font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  --primary-color: #646cff;
+  --bg-dark: #1e293b;
+  --bg-gradient: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+
+  /* Status Colors */
+  --status-good-bg: rgba(34, 197, 94, 0.2);
+  --status-good-border: rgba(34, 197, 94, 0.5);
+  --status-good-text: #4ade80;
+
+  --status-mod-bg: rgba(234, 179, 8, 0.2);
+  --status-mod-border: rgba(234, 179, 8, 0.5);
+  --status-mod-text: #facc15;
+
+  --status-bad-bg: rgba(239, 68, 68, 0.2);
+  --status-bad-border: rgba(239, 68, 68, 0.5);
+  --status-bad-text: #f87171;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family);
+  background: var(--bg-gradient);
+  color: var(--text-primary);
+  overflow: hidden;
+  /* App like feel */
+}
+
+/* Glassmorphism Utility */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  border-radius: 20px;
+}
+
+/* Map Custom Overlay Styles */
+.custom-overlay {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  font-size: 10px;
+  font-weight: bold;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  transition: transform 0.2s;
+}
+
+.custom-overlay:hover {
+  transform: scale(1.1);
+  z-index: 10;
+}
+
+.overlay-icon {
+  font-size: 18px;
+  margin-bottom: 2px;
+}
+
+/* Loop Animation for "Measuring" */
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.5;
+  }
+
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.measuring-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  animation: pulse-ring 2s infinite;
+}
+
+/* Search Bar Responsive Styles */
+.search-container {
+  position: absolute;
+  top: 85px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000 !important;
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+  width: auto;
+  max-width: 95%;
+}
+
+.search-form {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  width: 100%;
+}
+
+.search-input {
+  padding: 12px 20px;
+  border-radius: 25px;
+  border: 2px solid #000;
+  outline: none;
+  width: 300px;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  font-weight: 500;
+}
+
+.search-btn,
+.locate-btn {
+  width: 45px;
+  height: 45px;
+  min-width: 45px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #000;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: transform 0.2s;
+}
+
+/* Mobile Optimization */
+@media (max-width: 600px) {
+  .search-container {
+    top: 140px;
+    /* 필터 버튼 아래로 충분히 내림 */
+    width: 90%;
+  }
+
+  .search-input {
+    width: 100%;
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+
+  .search-btn,
+  .locate-btn {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+  }
+}
